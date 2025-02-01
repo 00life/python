@@ -1,0 +1,8 @@
+1) Install pyinstaller
+$     pip install pyinstaller
+
+2) Go to you project folder and invoke pyinstaller
+$     pyinstaller --onefile {SCRIPT_NAME.py}
+         #(--onefile ... Creates everything in one .exe file)
+	 #(-w ... When you don't want the console to show up on execution)
+
