@@ -28,6 +28,7 @@ pyautogui.scroll(200)
 # keyboard
 pyautogui.typewrite('Hello world!')
 pyautogui.press('enter')
+pyautogui.press('tab', presses=3)
 pyautogui.keyDown('shift')
 pyautogui.keyUp('shift')
 
