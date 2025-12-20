@@ -49,3 +49,6 @@ pyautogui.moveTo(picLoc, duration=2)
 myText = pyautogui.prompt(text="hello world", title="myPrompBox")
 myConfirm = pyautogui.confirm(text='', title='', buttons=['OK', 'Cancel'])
 
+# pause timeout
+pyautogui.PAUSE = 2.5
+
