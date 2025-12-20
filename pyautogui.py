@@ -30,6 +30,7 @@ pyautogui.write('hello world', interval=0.25)
 pyautogui.typewrite('Hello world!')
 pyautogui.press('enter')
 pyautogui.press('tab', presses=3)
+pyautogui.press(['a', 'b', 'c'])
 pyautogui.keyDown('shift')
 pyautogui.keyUp('shift')
 
