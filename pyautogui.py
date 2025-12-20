@@ -26,6 +26,7 @@ pyautogui.dragRel(200,0,duration=2)
 pyautogui.scroll(200)
 
 # keyboard
+pyautogui.write('hello world', interval=0.25)
 pyautogui.typewrite('Hello world!')
 pyautogui.press('enter')
 pyautogui.press('tab', presses=3)
