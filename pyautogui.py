@@ -42,6 +42,7 @@ im1.save('im1.png')
 # locate
 picLoc = pyautogui.locateOnScreen('im2.png')
 picLoc = pyautogui.locateCenterOnScreen('im2.png')
+pyautogui.moveTo(picLoc, duration=2)
 
 # prompts
 myText = pyautogui.prompt(text="hello world", title="myPrompBox")
