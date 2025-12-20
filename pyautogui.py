@@ -43,3 +43,6 @@ im1.save('im1.png')
 pyautogui.locateOnScreen('im2.png')
 pyautogui.locateCenterOnScreen('im2.png')
 
+# create a prompt to store text
+pyautogui.prompt(text="myText", title="myPrompBox")
+
