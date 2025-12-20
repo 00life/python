@@ -53,3 +53,10 @@ myConfirm = pyautogui.confirm(text='', title='', buttons=['OK', 'Cancel'])
 # pause timeout
 pyautogui.PAUSE = 2.5
 
+# Common Key Values
+Alphanumeric: 'a', 'b', 'c', '1', '2', '3', etc.
+Function Keys: 'f1', 'f2', 'f3' ... up to 'f12'
+Navigation: 'left', 'right', 'up', 'down', 'home', 'end', 'pageup', 'pagedown'
+Editing: 'enter', 'backspace', 'tab', 'space', 'delete', 'insert'
+Modifiers: 'shift', 'ctrl', 'alt', 'command', 'option', 'win' (Windows key)
+System: 'esc', 'printscreen', 'scrolllock', 'pause', 'capslock', 'numlock'
