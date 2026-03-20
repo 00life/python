@@ -35,7 +35,6 @@ sudo python3 $path_noisy --config $path_config &
 
 time_sleep2=$(func_random_number 60 120)m;
 echo "[*] PyNoise Finishes in $time_sleep2 minutes";
-sudo sleep $time_sleep2;
 
 echo "[+] Cleanup program..."
 pid_python=$(ps -a|grep -i python|awk '{print $1}');
