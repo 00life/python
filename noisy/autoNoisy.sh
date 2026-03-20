@@ -1,8 +1,11 @@
 #!/bin/sh
 
 # Variables
-set -- $(mktemp) $(mktemp);
-curl -s https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/noisy.py > $1;
+set -- $(mktemp) $(mktemp) $(mktemp);
+curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/noisy.py -o "$1";
+curl -sL https://example.com/file.zip -o "${2}.zip";
+sudo unzip "${2}.zip" $3;
+
 
 echo "\033[32m"
 
@@ -18,7 +21,8 @@ echo "[*] Sleeping for $time_sleep1 minutes"
 sudo sleep $time_sleep1;
 
 echo "[*] Running PyNoise"
-sudo python3 /home/pi/Automate/noisy/noisy.py --config /home/pi/Automate/noisy/config.json &
+#sudo python3 /home/pi/Automate/noisy/noisy.py --config /home/pi/Automate/noisy/config.json &
+sudo python3 $1 --config $3 &
 
 time_sleep2=$(func_random 60 120)m;
 echo "[*] PyNoise Finishes in $time_sleep2 minutes";
@@ -26,6 +30,7 @@ sudo sleep $time_sleep2;
 
 pid_python=$(ps -a|grep -i python|awk '{print $1}');
 sudo kill -9 $pid_python;
+set --;
 
 echo "[*] Rebooting";
 
