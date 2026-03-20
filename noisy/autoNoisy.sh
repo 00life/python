@@ -17,25 +17,14 @@ python3 -m pip install -r  $path_req --break-system-packages 2>&1 > /dev/null;
 sudo unzip -o $path_zip -d $path_dir 2>&1 > /dev/null;
 path_config=$(echo "${path_dir}/config.json");
 
-#/ Function that generates a random number
-
-func_random_number(){
-  local min=$1;
-  local max=$(($2-$1+1));
-  local x=`hexdump -n 2 -e '/2 "%u"' /dev/urandom`;
-  echo $(($x%$max+$min));
-};
-
-time_sleep1=$(func_random_number 1 2)m;
-echo "[*] Sleeping for $time_sleep1 minutes"
-sudo sleep $time_sleep1;
+echo "[*] Sleeping for 1 minutes"
+sudo sleep 1m;
 
 echo "[+] Running PyNoise";
 sudo python3 $path_noisy --config $path_config &
 
-time_sleep2=$(func_random_number 60 120)m;
-echo "[*] PyNoise Finishes in $time_sleep2 minutes";
-sudo sleep $time_sleep2;
+echo "[*] PyNoise Finishes in 5 minutes";
+sudo sleep 5m;
 
 echo "[+] Cleanup program..."
 pid_python=$(ps -a|grep -i python|awk '{print $1}');
