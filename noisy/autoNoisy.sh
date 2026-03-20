@@ -21,7 +21,7 @@ echo "[*] Sleeping for 1 minutes"
 sudo sleep 1m;
 
 echo "[+] Running PyNoise";
-sudo python3 $path_noisy --config $path_config &
+sudo python3 $path_noisy --config $path_config
 
 echo "[*] PyNoise Finishes in 5 minutes";
 sudo sleep 5m;
