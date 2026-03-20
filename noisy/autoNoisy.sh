@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Variables
-github_noisy=
+github_code_noisy=$(curl -s https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/noisy.py);
 
 echo "\033[32m"
 
