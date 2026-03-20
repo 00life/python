@@ -35,7 +35,7 @@ sudo python3 $path_noisy --config $path_config &
 
 time_sleep2=$(func_random_number 60 120)m;
 echo "[*] PyNoise Finishes in $time_sleep2 minutes";
-#sudo sleep $time_sleep2;
+sudo sleep $time_sleep2;
 
 echo "[+] Cleanup program..."
 pid_python=$(ps -a|grep -i python|awk '{print $1}');
@@ -44,9 +44,9 @@ sudo kill -9 $pid_python;
 echo "2";
 sudo rm -rf /tmp/*;
 echo "3";
-#unset path_noisy path_zip path_dir path_req path_config pid_python;
+unset path_noisy path_zip path_dir path_req path_config pid_python;
 
 echo "[*] Rebooting";
-sudo init 6;
-sudo reboot;
-exit 0
+#sudo init 6;
+#sudo reboot;
+#exit 0
