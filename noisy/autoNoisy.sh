@@ -3,7 +3,7 @@
 # Variables
 set -- $(mktemp) $(mktemp) $(mktemp);
 curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/noisy.py -o "$1";
-curl -sL https://example.com/file.zip -o "${2}.zip";
+curl -sL https://github.com/00life/python/raw/refs/heads/master/noisy/config.zip -o "${2}.zip";
 sudo unzip "${2}.zip" $3;
 
 
