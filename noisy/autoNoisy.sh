@@ -1,6 +1,7 @@
 #!/bin/sh
 
 #\ Variables
+
 path_noisy=$(mktemp);
 path_zip=$(mktemp --suffix=".zip");
 path_dir=$(mktemp -d);
@@ -15,6 +16,8 @@ echo "[+] Installing python requirments.txt";
 python3 -m pip install -r  $path_req --break-system-packages 2>&1 > /dev/null;
 sudo unzip -o $path_zip -d $path_dir 2>&1 > /dev/null;
 path_config=$(echo "${path_dir}/config.json");
+
+#/ Function that generates a random number
 
 func_random_number(){
   local min=$1;
@@ -41,7 +44,7 @@ sudo kill -9 $pid_python;
 echo "2";
 sudo rm -rf /tmp/*;
 echo "3";
-unset path_noisy path_zip path_dir path_req path_config pid_python;
+#unset path_noisy path_zip path_dir path_req path_config pid_python;
 
 echo "[*] Rebooting";
 sudo init 6;
