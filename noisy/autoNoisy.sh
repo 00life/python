@@ -36,9 +36,12 @@ sudo sleep $time_sleep2;
 
 echo "[+] Cleanup program..."
 pid_python=$(ps -a|grep -i python|awk '{print $1}');
+echo "1";
 sudo kill -9 $pid_python;
+echo "2";
 sudo rm -rf /tmp/*;
-unset path_noisy path_zip path_dir path_req path_config;
+echo "3";
+unset path_noisy path_zip path_dir path_req path_config pid_python;
 
 echo "[*] Rebooting";
 sudo init 6;
