@@ -3,12 +3,9 @@
 # Variables
 set -- $(mktemp) $(mktemp --suffix=".zip" ) $(mktemp);
 curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/noisy.py -o "$1";
-
 curl -sL https://github.com/00life/python/raw/refs/heads/master/noisy/config.zip -o "${2}";
-
-echo "[*] Unziping"
 sudo unzip $2 $3;
-wc -l <<< "$3";
+echo $(wc -l <<< "$3");
 
 echo "\033[32m"
 
