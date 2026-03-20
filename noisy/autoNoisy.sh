@@ -8,7 +8,7 @@ curl -sL https://github.com/00life/python/raw/refs/heads/master/noisy/config.zip
 
 echo "[*] Unziping"
 sudo unzip $2 $3;
-cat $3;
+wc -l <<< "$3";
 
 echo "\033[32m"
 
