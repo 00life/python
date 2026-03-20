@@ -10,7 +10,7 @@ curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy
 curl -sL https://github.com/00life/python/raw/refs/heads/master/noisy/config.zip -o $path_zip;
 curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/requirements.txt -o $path_req
 
-echo "$[+] Installing python requirments.txt"
+echo "[+] Installing python requirments.txt";
 
 python3 -m pip install -r  $path_req --break-system-packages 2>&1 > /dev/null;
 sudo unzip -o $path_zip -d $path_dir 2>&1 > /dev/null;
