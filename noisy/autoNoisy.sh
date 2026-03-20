@@ -7,7 +7,7 @@ curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy
 curl -sL https://github.com/00life/python/raw/refs/heads/master/noisy/config.zip -o "${2}";
 
 echo "[*] Unziping"
-sudo unzip $2 > $3;
+sudo unzip -p $2 > $3;
 echo "[*] Done"
 
 echo "\033[32m"
