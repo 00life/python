@@ -1,42 +1,46 @@
 #!/bin/sh
 
 #\ Variables
+path_noisy=$(mktemp);
+path_zip=$(mktemp --suffix=".zip");
+path_dir=$(mktemp -d);
+path_req=$(mktemp);
 
-set -- $(mktemp) $(mktemp --suffix=".zip" ) $(mktemp) $(mktemp);
-curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/noisy.py -o "$1";
-curl -sL https://github.com/00life/python/raw/refs/heads/master/noisy/config.zip -o "${2}";
-curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/requirements.txt -o "$4"
-sudo unzip $2 $3;
-wc -l <<< $3;
-sudo pip -r $1;
-echo "\033[32m"
+curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/noisy.py -o $path_noisy;
+curl -sL https://github.com/00life/python/raw/refs/heads/master/noisy/config.zip -o $path_zip;
+curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/requirements.txt -o $path_req
 
-func_random(){
-min=$1;
-max=$(($2-$1+1));
-x=`hexdump -n 2 -e '/2 "%u"' /dev/urandom`;
-echo $(($x%$max+$min))
+echo "$[+] Installing python requirments.txt"
+
+python3 -m pip install -r  $path_req --break-system-packages;
+sudo unzip -o $path_zip -d $path_dir;
+path_config=$(echo "${path_dir}/config.json");
+
+func_random_number(){
+  local min=$1;
+  local max=$(($2-$1+1));
+  local x=`hexdump -n 2 -e '/2 "%u"' /dev/urandom`;
+  echo $(($x%$max+$min));
 };
 
-time_sleep1=$(func_random 1 2)m;
+time_sleep1=$(func_random_number 1 2)m;
 echo "[*] Sleeping for $time_sleep1 minutes"
 sudo sleep $time_sleep1;
 
-echo "[*] Running PyNoise"
-#sudo python3 /home/pi/Automate/noisy/noisy.py --config /home/pi/Automate/noisy/config.json &
-sudo python3 $1 --config $3 &
+echo "[+] Running PyNoise";
+sudo python3 $path_noisy --config $path_config &;
 
-time_sleep2=$(func_random 60 120)m;
+time_sleep2=$(func_random_number 60 120)m;
 echo "[*] PyNoise Finishes in $time_sleep2 minutes";
 sudo sleep $time_sleep2;
 
+echo "[+] Cleanup program..."
 pid_python=$(ps -a|grep -i python|awk '{print $1}');
 sudo kill -9 $pid_python;
-set --;
+sudo rm -rf /tmp/*;
+unset path_noisy path_zip path_dir path_req path_config
 
 echo "[*] Rebooting";
-
-echo "\033[0m";
-
 sudo init 6;
 sudo reboot;
+exit 0
