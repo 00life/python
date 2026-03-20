@@ -12,8 +12,8 @@ curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy
 
 echo "$[+] Installing python requirments.txt"
 
-python3 -m pip install -r  $path_req --break-system-packages;
-sudo unzip -o $path_zip -d $path_dir;
+python3 -m pip install -r  $path_req --break-system-packages 2>&1 > /dev/null;
+sudo unzip -o $path_zip -d $path_dir 2>&1 > /dev/null;
 path_config=$(echo "${path_dir}/config.json");
 
 func_random_number(){
