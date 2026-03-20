@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Variables
-set -- $(mktemp) $(mktemp --suffix=".zip" ) $(mktemp);
+set -- $(mktemp) $(mktemp --suffix=".zip" ) $(mktemp config_xxxx);
 curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/noisy.py -o "$1";
 curl -sL https://github.com/00life/python/raw/refs/heads/master/noisy/config.zip -o "${2}";
 sudo unzip "${2}.zip" $3;
