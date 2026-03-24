@@ -20,7 +20,7 @@ echo "[*] Sleeping for 1 minutes"
 sudo sleep 1m;
 
 echo "[+] Running PyNoise";
-sudo python3 $PATH_NOISY --config "${PATH_DIR}/config.json" --timeout 3600 --log debug &
+sudo python3 $PATH_NOISY --config "${PATH_DIR}/config.json" --timeout 3600 &
 
 sudo sleep 3600;
 echo "[+] Cleanup program..."
@@ -31,6 +31,5 @@ sudo rm -rf /tmp/*;
 unset PATH_NOISY PATH_ZIP PATH_DIR PATH_REQ PATH_CONFIG PID_PYTHON;
 
 echo "[*] Rebooting";
-#sudo init 6;
-#sudo reboot;
-#exit 0
+sudo init 6;
+sudo reboot;
