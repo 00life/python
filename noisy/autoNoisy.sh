@@ -1,36 +1,34 @@
-#!/bin/sh
+#!/bin/bash
 
-#\ Variables
+PATH_NOISY=$(mktemp); 
+curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/noisy.py -o $PATH_NOISY;
 
-path_noisy=$(mktemp);
-path_zip=$(mktemp --suffix=".zip");
-path_dir=$(mktemp -d);
-path_req=$(mktemp);
+PATH_ZIP=$(mktemp --suffix=".zip"); 
+curl -sL https://github.com/00life/python/raw/refs/heads/master/noisy/config.zip -o $PATH_ZIP;
 
-curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/noisy.py -o $path_noisy;
-curl -sL https://github.com/00life/python/raw/refs/heads/master/noisy/config.zip -o $path_zip;
-curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/requirements.txt -o $path_req
+PATH_REQ=$(mktemp); 
+curl -sL https://raw.githubusercontent.com/00life/python/refs/heads/master/noisy/requirements.txt -o $PATH_REQ
 
 echo "[+] Installing python requirments.txt";
 
-python3 -m pip install -r  $path_req --break-system-packages 2>&1 > /dev/null;
-sudo unzip -o $path_zip -d $path_dir 2>&1 > /dev/null;
-path_config=$(echo "${path_dir}/config.json");
+python3 -m pip install -r  $PATH_REQ --break-system-packages 2>&1 > /dev/null;
+
+PATH_DIR=$(mktemp -d); 
+sudo unzip -o $PATH_ZIP -d $PATH_DIR 2>&1 > /dev/null;
 
 echo "[*] Sleeping for 1 minutes"
 sudo sleep 1m;
 
 echo "[+] Running PyNoise";
-sudo python3 $path_noisy --config $path_config
+sudo python3 $PATH_NOISY --config "${PATH_DIR}/config.json" --timeout 3600 --log debug &
 
-echo "[*] PyNoise Finishes in 5 minutes";
-sudo sleep 5m;
-
+sudo sleep 3600;
 echo "[+] Cleanup program..."
-pid_python=$(ps -a|grep -i python|awk '{print $1}');
-sudo kill -9 $pid_python;
+
+PID_PYTHON=$(ps -a|grep -i python|awk '{print $1}');
+sudo kill -9 $PID_PYTHON;
 sudo rm -rf /tmp/*;
-unset path_noisy path_zip path_dir path_req path_config pid_python;
+unset PATH_NOISY PATH_ZIP PATH_DIR PATH_REQ PATH_CONFIG PID_PYTHON;
 
 echo "[*] Rebooting";
 #sudo init 6;
